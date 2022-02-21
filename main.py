@@ -1,5 +1,6 @@
 import uuid
 from collections import OrderedDict as od, deque
+from pprint import pprint
 
 import gym
 import numpy as np
@@ -14,12 +15,12 @@ from model import Agent
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-env = gym.make('CartPole-v1')
 num_actions = None
-buffer_size = 128
+
 
 def _avg(l):
     return sum(l) / len(l)
+
 
 class RolloutWorker:
     def __init__(self, env, agent, max_steps=int(1e12)):
@@ -56,24 +57,36 @@ class RolloutWorker:
         return info
 
 
+DEBUG = True
+WANDB_MODE = 'online' if DEBUG else 'offline'
+
+
+def _p(x):
+    if DEBUG:
+        print(x)
+
+
 if __name__ == '__main__':
     summary_writer = SummaryWriter('.')
-    # wandb.init(project="ppo-v2", mode='disabled')
-    wandb.init(project="ppo-v2")
-    env = gym.make('CartPole-v1')
+
+    wandb.init(project="ppo-v2", mode=WANDB_MODE)
+    # env = gym.make('CartPole-v1')
+    env = gym.make('Acrobot-v1')
+    _p(env.__repr__())
+    _p(env.spec)
+    _p(env.observation_space)
+    _p(env.action_space)
     # env = gym.make("MountainCar-v0")
     # env = gym.make("ALE/Gravitar-v5")
     # env = gym.make("Taxi-v3") failed
     # env = gym.make("FrozenLake-v1") failed
-    print(env.__repr__())
-    num_actions = env.action_space.n
     eg = od({
         'obs': env.observation_space.sample(),
         'action': env.action_space.sample(),
         'reward': 0.,
         'done': False,
     })
-    print(f'example transition\n{eg}')
+    _p(f'example transition\n{eg}')
     extras = od({
         'value': np.float32,
         'log_prob': np.float32,
@@ -89,10 +102,11 @@ if __name__ == '__main__':
         example=eg,
         extras=extras
     )
-    print(f'buffer spec\n{buffer.dtype}')
-    in_features = 4
+    _p(f'buffer spec\n{buffer.dtype}')
+    in_features = env.observation_space.shape[0]
+    num_actions = env.action_space.n
     agent = Agent(buffer, in_features, num_actions, device)
-    print(agent)
+    _p(agent)
     # summary_writer.add_graph(agent, torch.FloatTensor(eg['obs']).to('cuda'))
     env = wrappers.Monitor(
         env,
@@ -104,6 +118,9 @@ if __name__ == '__main__':
     for epoch in range(num_epochs):
         info = worker.run(steps=train_interval)
         loss_dict = agent.learn()
-        print(env.episode_id)
+        if DEBUG:
+            _p(env.episode_id)
+            _p(loss_dict)
+            _p(info)
         wandb.log(loss_dict)
         wandb.log(info)

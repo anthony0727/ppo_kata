@@ -26,7 +26,7 @@ def gae(rews, vals, dones, gam=0.99, lamb=0.95):
     masks = 1 - dones  # n + 1
     for i in reversed(range(len(vals) - 1)):
         delta = -vals[i] + (rews[i] + masks[i] * (gam * vals[i + 1]))
-        advs[i] = delta + masks[i] * (gam * lamb * advs[i+1])
+        advs[i] = delta + masks[i] * (gam * lamb * advs[i + 1])
 
     return advs
 
@@ -105,7 +105,6 @@ class Agent(nn.Module):
 
         return Categorical(probs.cpu())
 
-
     def observe(self, obs, action, reward, done):
         if done:
             self.log_prob = 0.
@@ -121,7 +120,8 @@ class Agent(nn.Module):
         )
 
     def learn(self):
-        advs = gae(self.buffer['reward'], self.buffer['value'], self.buffer['done'])
+        advs = gae(self.buffer['reward'], self.buffer['value'],
+                   self.buffer['done'])
         returns = _t(self.buffer['value'] + advs)
         advs = standardize(_t(advs))
         num_batches = 4
@@ -143,8 +143,10 @@ class Agent(nn.Module):
                 vf_coef = 0.5
                 ent_coef = 0.01
                 entropy = ac_dist.entropy().mean()
-                actor_loss = surrogate_loss(ratios, batch_advs) + ent_coef * entropy
-                critic_loss = vf_coef * F.smooth_l1_loss(values, returns[batch_idx])
+                actor_loss = surrogate_loss(ratios,
+                                            batch_advs) + ent_coef * entropy
+                critic_loss = vf_coef * F.smooth_l1_loss(values,
+                                                         returns[batch_idx])
 
                 utility = actor_loss - critic_loss
                 loss = -utility
