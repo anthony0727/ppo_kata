@@ -132,7 +132,7 @@ class Agent(nn.Module):
 
         for local_epoch in range(self.local_epochs):
             for batch_idx in idxes:
-                batch = self.buffer[batch_idx].as_tensor()
+                batch = self.buffer[batch_idx].as_tensor_dict(device='cuda')
                 # inference
                 ac_dist, values = self(batch['obs'])
 

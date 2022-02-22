@@ -3,6 +3,8 @@ from collections import OrderedDict
 import gym
 import pytest
 
+import numpy as np
+
 
 @pytest.fixture
 def env():
@@ -20,5 +22,15 @@ def example():
 
     return eg
 
-def test_axis():
+
+@pytest.fixture
+def Buffer():
     pass
+
+
+def test_axis():
+    buffer = Buffer()
+    num_agents = 12
+    buffer = np.stack([buffer] * num_agents)
+    num_envs = 32
+    buffer = np.stack([buffer] * num_envs)

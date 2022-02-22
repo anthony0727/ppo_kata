@@ -57,7 +57,7 @@ class Buffer(np.ndarray):
 
         dtype = np.dtype(dtype_list + extra_dtype_list)
 
-        # add 1 for initial state
+        # add 1 for last value
         max_size = num_transitions + 1
         obj = super().__new__(cls, shape=max_size, dtype=dtype)
         obj.seed = seed
@@ -66,70 +66,50 @@ class Buffer(np.ndarray):
         return obj
 
     def __array_finalize__(self, obj):
-        self.curr_idx = -1
+        self.curr_idx = 0
+        self.last_transition = None
 
     def reset(self):
-        self.curr_idx = -1
+        # reset will contain last transition from previous truncated episode
+        self.curr_idx = 0
+        self.insert(self.last_transition, self.curr_idx)
 
     def is_full(self):
-        return self.curr_idx == (len(self) - 1)
+        return self.curr_idx == len(self)
+
+    def insert(self, idx, transition):
+        for k, v in transition.items():
+            self[k][idx] = v
 
     def append(self, **kwargs):
         if self.is_full():
             self.reset()
 
+        self.insert(self.curr_idx, kwargs)
         self.curr_idx += 1
-        for k, v in kwargs.items():
-            self[k][self.curr_idx] = v
+        self.last_transition = kwargs
 
     @property
     def all_keys(self):
         return list(self.dtype.fields.keys())
 
-    def as_tensor(self, device='cuda'):
-        t = {}
+    def _as_dict(self, cls_callback):
+        d = {}
         for k in self.all_keys:
-            t[k] = torch.from_numpy(np.array(self[k])).to(device)
+            d[k] = cls_callback(self[k])
+        return d
 
-        return t
+    def as_dict(self):
+        callback = np.array
 
-    def get_tensor(self, key, device='cuda'):
+        return self._as_dict(callback)
+
+    def as_tensor_dict(self, device='cpu'):
+
+        return self._as_dict(
+            lambda x: torch.from_numpy(np.array(x)).to(device)
+        )
+
+    def get_tensor(self, key, device='cpu'):
+
         return torch.from_numpy(np.array(self[key])).to(device)
-
-    # def _sample_idxes(self, size):
-    #     if not size:
-    #         size = self.curr_idx
-    #
-    #     assert 0 <= self.curr_idx, 'buffer is empty'
-    #     assert size <= self.curr_idx + 1, 'cannot sample larger than buffer ' \
-    #                                       'size'
-    #
-    #     # range is exclusive
-    #     idxes = np.arange(0, self.curr_idx)
-    #
-    #     return idxes
-
-    # def sample(self, size=None):
-    #     #         dtype = self._sample_dtype()
-    #     #         data = np.array(data, dtype=dtype)
-    #     idxes = self._sample_idxes(size)
-    #
-    #     t = {}
-    #     t['next_obs'] = self[idxes + 1]['obs']
-    #     for k in self.all_keys:
-    #         t[k] = self[idxes][k]
-    #
-    #     # not contiguous
-    #     return t
-    #
-    # def sample_as_tensor(self, size=None, device='cuda'):
-    #     idxes = self._sample_idxes(size)
-    #
-    #     t = {}
-    #     t['next_obs'] = torch.from_numpy(
-    #         np.array(self[idxes + 1]['obs'])
-    #     ).to(device)
-    #     for k in self.all_keys:
-    #         t[k] = torch.from_numpy(np.array(self[idxes][k])).to(device)
-    #
-    #     return t

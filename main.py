@@ -58,7 +58,7 @@ class RolloutWorker:
 
 DEBUG = True
 WANDB = False
-WANDB = True
+# WANDB = True
 WANDB_MODE = 'online' if WANDB else 'offline'
 
 
@@ -103,7 +103,6 @@ if __name__ == '__main__':
         example=eg,
         extras=extras
     )
-
     _p(f'buffer spec\n{buffer.dtype}')
     in_features = env.observation_space.shape[0]
     num_actions = env.action_space.n
