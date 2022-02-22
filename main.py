@@ -44,8 +44,8 @@ class RolloutWorker:
         info = {}
         try:
             num_episodes = 100
-            lengths = np.array(env.get_episode_lengths()[:-num_episodes])
-            returns = np.array(env.get_episode_rewards()[:-num_episodes])
+            lengths = np.array(env.get_episode_lengths()[-num_episodes:])
+            returns = np.array(env.get_episode_rewards()[-num_episodes:])
             info['average_length'] = lengths.mean()
             info['average_return'] = returns.mean()
             info['max_length'] = lengths.max()
@@ -58,6 +58,7 @@ class RolloutWorker:
 
 DEBUG = True
 WANDB = False
+WANDB = True
 WANDB_MODE = 'online' if WANDB else 'offline'
 
 
@@ -70,8 +71,8 @@ if __name__ == '__main__':
     summary_writer = SummaryWriter('.')
 
     wandb.init(project="ppo-v2", mode=WANDB_MODE)
-    # env = gym.make('CartPole-v1')
-    env = gym.make('Acrobot-v1')
+    env = gym.make('CartPole-v1')
+    # env = gym.make('Acrobot-v1')
     _p(env.__repr__())
     _p(env.spec)
     _p(env.observation_space)

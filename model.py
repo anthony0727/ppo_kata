@@ -75,6 +75,9 @@ class Agent(nn.Module):
             lr=lr
         )
 
+        self.log_prob = 0.
+        self.value = 0.
+
     def forward(self, x):
         ac_dist = self._policy(x)
         val = self._value(x)
@@ -120,8 +123,7 @@ class Agent(nn.Module):
         )
 
     def learn(self):
-        advs = gae(self.buffer['reward'], self.buffer['value'],
-                   self.buffer['done'])
+        advs = gae(self.buffer['reward'], self.buffer['value'], self.buffer['done'])
         returns = _t(self.buffer['value'] + advs)
         advs = standardize(_t(advs))
         num_batches = 4
@@ -143,10 +145,8 @@ class Agent(nn.Module):
                 vf_coef = 0.5
                 ent_coef = 0.01
                 entropy = ac_dist.entropy().mean()
-                actor_loss = surrogate_loss(ratios,
-                                            batch_advs) + ent_coef * entropy
-                critic_loss = vf_coef * F.smooth_l1_loss(values,
-                                                         returns[batch_idx])
+                actor_loss = surrogate_loss(ratios, batch_advs) + ent_coef * entropy
+                critic_loss = vf_coef * F.smooth_l1_loss(values, returns[batch_idx])
 
                 utility = actor_loss - critic_loss
                 loss = -utility

@@ -58,7 +58,7 @@ class Buffer(np.ndarray):
         dtype = np.dtype(dtype_list + extra_dtype_list)
 
         # add 1 for initial state
-        max_size = num_transitions
+        max_size = num_transitions + 1
         obj = super().__new__(cls, shape=max_size, dtype=dtype)
         obj.seed = seed
         obj.num_transitions = num_transitions
