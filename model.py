@@ -123,8 +123,8 @@ class Agent(nn.Module):
         )
 
     def learn(self):
-        advs = gae(self.buffer['reward'], self.buffer['value'], self.buffer['done'])
-        returns = _t(self.buffer['value'] + advs)
+        advs = gae(self.buffer['reward'][:-1], self.buffer['value'], self.buffer['done'][:-1])
+        returns = _t(self.buffer['value'][:-1] + advs)
         advs = standardize(_t(advs))
         num_batches = 4
         idxes = np.arange(0, len(self.buffer))
