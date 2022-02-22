@@ -1,13 +1,12 @@
 import uuid
-from collections import OrderedDict as od, deque
-from pprint import pprint
+from collections import OrderedDict
 
 import gym
 import numpy as np
 import torch
-from torch.utils.tensorboard import SummaryWriter
 import wandb
 from gym import wrappers
+from torch.utils.tensorboard import SummaryWriter
 
 from buffer import Buffer
 # from pettingzoo import magent
@@ -58,7 +57,8 @@ class RolloutWorker:
 
 
 DEBUG = True
-WANDB_MODE = 'online' if DEBUG else 'offline'
+WANDB = False
+WANDB_MODE = 'online' if WANDB else 'offline'
 
 
 def _p(x):
@@ -80,14 +80,14 @@ if __name__ == '__main__':
     # env = gym.make("ALE/Gravitar-v5")
     # env = gym.make("Taxi-v3") failed
     # env = gym.make("FrozenLake-v1") failed
-    eg = od({
+    eg = OrderedDict({
         'obs': env.observation_space.sample(),
         'action': env.action_space.sample(),
         'reward': 0.,
         'done': False,
     })
     _p(f'example transition\n{eg}')
-    extras = od({
+    extras = OrderedDict({
         'value': np.float32,
         'log_prob': np.float32,
     })
@@ -102,6 +102,7 @@ if __name__ == '__main__':
         example=eg,
         extras=extras
     )
+
     _p(f'buffer spec\n{buffer.dtype}')
     in_features = env.observation_space.shape[0]
     num_actions = env.action_space.n

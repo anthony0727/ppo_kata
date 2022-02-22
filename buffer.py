@@ -1,4 +1,3 @@
-import numbers
 from typing import OrderedDict
 
 import numpy as np
@@ -72,30 +71,20 @@ class Buffer(np.ndarray):
     def reset(self):
         self.curr_idx = -1
 
-    def append(self, **kwargs):
-        if self.curr_idx == len(self) - 1:
-            self.curr_idx = -1
+    def is_full(self):
+        return self.curr_idx == (len(self) - 1)
 
-        for k, v in kwargs.items():
-            self[k][self.curr_idx + 1] = v
+    def append(self, **kwargs):
+        if self.is_full():
+            self.reset()
+
         self.curr_idx += 1
+        for k, v in kwargs.items():
+            self[k][self.curr_idx] = v
 
     @property
     def all_keys(self):
         return list(self.dtype.fields.keys())
-
-    def _sample_idxes(self, size):
-        if not size:
-            size = self.curr_idx
-
-        assert 0 <= self.curr_idx, 'buffer is empty'
-        assert size <= self.curr_idx + 1, 'cannot sample larger than buffer ' \
-                                          'size'
-
-        # range is exclusive
-        idxes = np.arange(0, self.curr_idx)
-
-        return idxes
 
     def as_tensor(self, device='cuda'):
         t = {}
@@ -106,6 +95,19 @@ class Buffer(np.ndarray):
 
     def get_tensor(self, key, device='cuda'):
         return torch.from_numpy(np.array(self[key])).to(device)
+
+    # def _sample_idxes(self, size):
+    #     if not size:
+    #         size = self.curr_idx
+    #
+    #     assert 0 <= self.curr_idx, 'buffer is empty'
+    #     assert size <= self.curr_idx + 1, 'cannot sample larger than buffer ' \
+    #                                       'size'
+    #
+    #     # range is exclusive
+    #     idxes = np.arange(0, self.curr_idx)
+    #
+    #     return idxes
 
     # def sample(self, size=None):
     #     #         dtype = self._sample_dtype()
