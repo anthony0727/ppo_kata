@@ -28,7 +28,7 @@ def gae(rews, vals, dones, gam=0.99, lamb=0.95):
         delta = -vals[i] + (rews[i] + masks[i] * (gam * vals[i + 1]))
         advs[i] = delta + masks[i] * (gam * lamb * advs[i + 1])
 
-    return advs
+    return advs[:-1]
 
 
 def surrogate_loss(ratios, advs, clip_param=0.1):
@@ -123,16 +123,17 @@ class Agent(nn.Module):
         )
 
     def learn(self):
-        advs = gae(self.buffer['reward'][:-1], self.buffer['value'], self.buffer['done'][:-1])
-        returns = _t(self.buffer['value'][:-1] + advs)
+        buffer = self.buffer[:-1] # omit last value
+        advs = gae(buffer['reward'], self.buffer['value'], buffer['done'])
+        returns = _t(buffer['value'] + advs)
         advs = standardize(_t(advs))
         num_batches = 4
-        idxes = np.arange(0, len(self.buffer))
+        idxes = np.arange(0, len(buffer)) # misleading?
         idxes = np.split(idxes, num_batches)
 
         for local_epoch in range(self.local_epochs):
             for batch_idx in idxes:
-                batch = self.buffer[batch_idx].as_tensor_dict(device='cuda')
+                batch = buffer[batch_idx].as_tensor_dict(device='cuda')
                 # inference
                 ac_dist, values = self(batch['obs'])
 
@@ -143,7 +144,7 @@ class Agent(nn.Module):
                 batch_advs = advs[batch_idx]
                 # loss
                 vf_coef = 0.5
-                ent_coef = 0.01
+                ent_coef = 0.001
                 entropy = ac_dist.entropy().mean()
                 actor_loss = surrogate_loss(ratios, batch_advs) + ent_coef * entropy
                 critic_loss = vf_coef * F.smooth_l1_loss(values, returns[batch_idx])

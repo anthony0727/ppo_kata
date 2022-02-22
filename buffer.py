@@ -71,7 +71,7 @@ class Buffer(np.ndarray):
     def reset(self):
         # reset will contain last transition from previous truncated episode
         self.curr_idx = 0
-        self.insert(self[-1], self.curr_idx)
+        self[0] = self[-1].copy()
 
     def is_full(self):
         return self.curr_idx == (len(self) - 1)
@@ -94,7 +94,7 @@ class Buffer(np.ndarray):
     def _as_dict(self, cls_callback):
         d = {}
         for k in self.all_keys:
-            d[k] = cls_callback(self[k][:-1])
+            d[k] = cls_callback(self[k])
         return d
 
     def as_dict(self):
@@ -110,4 +110,4 @@ class Buffer(np.ndarray):
 
     def get_tensor(self, key, device='cpu'):
 
-        return torch.from_numpy(np.array(self[key][:-1])).to(device)
+        return torch.from_numpy(np.array(self[key])).to(device)

@@ -58,7 +58,7 @@ class RolloutWorker:
 
 DEBUG = True
 WANDB = False
-# WANDB = True
+WANDB = True
 WANDB_MODE = 'online' if WANDB else 'offline'
 
 
