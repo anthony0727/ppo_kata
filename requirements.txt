@@ -1,2 +1,4 @@
 torch
 gym
+wandb
+pyglet

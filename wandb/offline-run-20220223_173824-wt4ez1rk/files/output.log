@@ -1,0 +1,283 @@
+<Monitor<TimeLimit<CartPoleEnv<CartPole-v1>>>>
+EnvSpec(CartPole-v1)
+Box([-4.8000002e+00 -3.4028235e+38 -4.1887903e-01 -3.4028235e+38], [4.8000002e+00 3.4028235e+38 4.1887903e-01 3.4028235e+38], (4,), float32)
+Discrete(2)
+example transition
+OrderedDict([('obs', array([ 1.1435804e+00,  2.4121771e+37,  4.1805640e-01, -2.6640318e+38],
+      dtype=float32)), ('action', 0), ('reward', 0.0), ('done', False)])
+buffer spec
+[('obs', '<f4', (4,)), ('action', '<i8'), ('reward', '<f8'), ('done', 'u1'), ('value', '<f4'), ('log_prob', '<f4')]
+Agent(
+  (actor): Sequential(
+    (0): Linear(in_features=4, out_features=256, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=256, out_features=256, bias=True)
+    (3): Tanh()
+    (4): Linear(in_features=256, out_features=2, bias=True)
+    (5): Softmax(dim=-1)
+  )
+  (critic): Sequential(
+    (0): Linear(in_features=4, out_features=256, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=256, out_features=256, bias=True)
+    (3): Tanh()
+    (4): Linear(in_features=256, out_features=1, bias=True)
+  )
+)
+6
+{'pg loss': -0.1744745373725891, 'value loss': 3.3941385746002197, 'entropy': 0.6925127506256104}
+{'average_length': 23.2, 'average_return': 23.2, 'max_length': 31, 'max_return': 31.0}
+12
+{'pg loss': 0.19000352919101715, 'value loss': 3.795255422592163, 'entropy': 0.6925698518753052}
+{'average_length': 20.0, 'average_return': 20.0, 'max_length': 31, 'max_return': 31.0}
+18
+{'pg loss': 0.025855716317892075, 'value loss': 3.453810453414917, 'entropy': 0.692497730255127}
+{'average_length': 20.88235294117647, 'average_return': 20.88235294117647, 'max_length': 35, 'max_return': 35.0}
+22
+{'pg loss': -0.09724684804677963, 'value loss': 3.87581729888916, 'entropy': 0.6922428607940674}
+{'average_length': 22.428571428571427, 'average_return': 22.428571428571427, 'max_length': 38, 'max_return': 38.0}
+27
+{'pg loss': -0.39419421553611755, 'value loss': 2.762493848800659, 'entropy': 0.6924975514411926}
+{'average_length': 22.74074074074074, 'average_return': 22.74074074074074, 'max_length': 54, 'max_return': 54.0}
+32
+{'pg loss': -0.15718089044094086, 'value loss': 3.620967388153076, 'entropy': 0.6925575137138367}
+{'average_length': 22.70967741935484, 'average_return': 22.70967741935484, 'max_length': 54, 'max_return': 54.0}
+39
+{'pg loss': -0.3562166690826416, 'value loss': 2.579404354095459, 'entropy': 0.6918878555297852}
+{'average_length': 22.473684210526315, 'average_return': 22.473684210526315, 'max_length': 54, 'max_return': 54.0}
+45
+{'pg loss': 0.11643151193857193, 'value loss': 3.778047561645508, 'entropy': 0.6919671297073364}
+{'average_length': 22.272727272727273, 'average_return': 22.272727272727273, 'max_length': 54, 'max_return': 54.0}
+52
+{'pg loss': 0.061793357133865356, 'value loss': 3.1671142578125, 'entropy': 0.6922265291213989}
+{'average_length': 21.431372549019606, 'average_return': 21.431372549019606, 'max_length': 54, 'max_return': 54.0}
+57
+{'pg loss': 0.07963978499174118, 'value loss': 4.019961833953857, 'entropy': 0.692365288734436}
+{'average_length': 21.678571428571427, 'average_return': 21.678571428571427, 'max_length': 54, 'max_return': 54.0}
+63
+{'pg loss': -0.13051357865333557, 'value loss': 2.8444738388061523, 'entropy': 0.6922433376312256}
+{'average_length': 21.56451612903226, 'average_return': 21.56451612903226, 'max_length': 54, 'max_return': 54.0}
+68
+{'pg loss': -0.16010835766792297, 'value loss': 3.3604140281677246, 'entropy': 0.6924424767494202}
+{'average_length': 21.83582089552239, 'average_return': 21.83582089552239, 'max_length': 54, 'max_return': 54.0}
+75
+{'pg loss': 0.16873523592948914, 'value loss': 3.314875602722168, 'entropy': 0.6927305459976196}
+{'average_length': 21.364864864864863, 'average_return': 21.364864864864863, 'max_length': 54, 'max_return': 54.0}
+81
+{'pg loss': 0.04506910592317581, 'value loss': 3.441188097000122, 'entropy': 0.6929562091827393}
+{'average_length': 21.225, 'average_return': 21.225, 'max_length': 54, 'max_return': 54.0}
+87
+{'pg loss': -0.029842248186469078, 'value loss': 3.3345913887023926, 'entropy': 0.6926010847091675}
+{'average_length': 21.11627906976744, 'average_return': 21.11627906976744, 'max_length': 54, 'max_return': 54.0}
+92
+{'pg loss': -0.08944565802812576, 'value loss': 3.3416907787323, 'entropy': 0.6926741600036621}
+{'average_length': 21.439560439560438, 'average_return': 21.439560439560438, 'max_length': 54, 'max_return': 54.0}
+97
+{'pg loss': 0.08878404647111893, 'value loss': 3.7118124961853027, 'entropy': 0.6921892166137695}
+{'average_length': 21.625, 'average_return': 21.625, 'max_length': 54, 'max_return': 54.0}
+103
+{'pg loss': -0.31735584139823914, 'value loss': 2.477414608001709, 'entropy': 0.6919263601303101}
+{'average_length': 21.21, 'average_return': 21.21, 'max_length': 54, 'max_return': 54.0}
+107
+{'pg loss': -0.12063992023468018, 'value loss': 3.6383919715881348, 'entropy': 0.691952645778656}
+{'average_length': 21.68, 'average_return': 21.68, 'max_length': 54, 'max_return': 54.0}
+111
+{'pg loss': 0.06544036418199539, 'value loss': 4.69893217086792, 'entropy': 0.6922731399536133}
+{'average_length': 22.39, 'average_return': 22.39, 'max_length': 54, 'max_return': 54.0}
+114
+{'pg loss': -0.08370481431484222, 'value loss': 4.199877738952637, 'entropy': 0.6927831172943115}
+{'average_length': 22.58, 'average_return': 22.58, 'max_length': 54, 'max_return': 54.0}
+120
+{'pg loss': 0.028523672372102737, 'value loss': 3.1302292346954346, 'entropy': 0.6930416822433472}
+{'average_length': 22.86, 'average_return': 22.86, 'max_length': 54, 'max_return': 54.0}
+123
+{'pg loss': 0.07082492858171463, 'value loss': 4.524016380310059, 'entropy': 0.6928488612174988}
+{'average_length': 22.64, 'average_return': 22.64, 'max_length': 51, 'max_return': 51.0}
+129
+{'pg loss': -0.11362998932600021, 'value loss': 3.236398935317993, 'entropy': 0.6927636861801147}
+{'average_length': 23.06, 'average_return': 23.06, 'max_length': 51, 'max_return': 51.0}
+134
+{'pg loss': -0.020652860403060913, 'value loss': 3.3560924530029297, 'entropy': 0.6928229331970215}
+{'average_length': 23.1, 'average_return': 23.1, 'max_length': 51, 'max_return': 51.0}
+141
+{'pg loss': 0.21631649136543274, 'value loss': 3.1366968154907227, 'entropy': 0.6927926540374756}
+{'average_length': 22.8, 'average_return': 22.8, 'max_length': 51, 'max_return': 51.0}
+146
+{'pg loss': -0.041322290897369385, 'value loss': 3.1663622856140137, 'entropy': 0.6928666234016418}
+{'average_length': 23.08, 'average_return': 23.08, 'max_length': 51, 'max_return': 51.0}
+151
+{'pg loss': 0.129524365067482, 'value loss': 3.754445791244507, 'entropy': 0.6926803588867188}
+{'average_length': 23.73, 'average_return': 23.73, 'max_length': 51, 'max_return': 51.0}
+157
+{'pg loss': 0.2085762768983841, 'value loss': 3.2286605834960938, 'entropy': 0.6926811933517456}
+{'average_length': 23.17, 'average_return': 23.17, 'max_length': 51, 'max_return': 51.0}
+161
+{'pg loss': 0.0025344425812363625, 'value loss': 3.970046043395996, 'entropy': 0.6928508281707764}
+{'average_length': 23.67, 'average_return': 23.67, 'max_length': 51, 'max_return': 51.0}
+167
+{'pg loss': 0.11291524767875671, 'value loss': 3.16135311126709, 'entropy': 0.6927861571311951}
+{'average_length': 23.51, 'average_return': 23.51, 'max_length': 51, 'max_return': 51.0}
+172
+{'pg loss': 0.10270572453737259, 'value loss': 3.594453811645508, 'entropy': 0.69269198179245}
+{'average_length': 23.77, 'average_return': 23.77, 'max_length': 51, 'max_return': 51.0}
+179
+{'pg loss': -0.09367336332798004, 'value loss': 2.19354248046875, 'entropy': 0.6930390000343323}
+{'average_length': 23.64, 'average_return': 23.64, 'max_length': 51, 'max_return': 51.0}
+186
+{'pg loss': -0.2495429664850235, 'value loss': 2.133251667022705, 'entropy': 0.6929778456687927}
+{'average_length': 23.62, 'average_return': 23.62, 'max_length': 51, 'max_return': 51.0}
+192
+{'pg loss': 0.06096479669213295, 'value loss': 3.2919082641601562, 'entropy': 0.6928529739379883}
+{'average_length': 23.29, 'average_return': 23.29, 'max_length': 51, 'max_return': 51.0}
+199
+{'pg loss': -0.1170872375369072, 'value loss': 2.4579877853393555, 'entropy': 0.6928123831748962}
+{'average_length': 23.04, 'average_return': 23.04, 'max_length': 51, 'max_return': 51.0}
+203
+{'pg loss': -0.14734864234924316, 'value loss': 3.24594783782959, 'entropy': 0.6928358674049377}
+{'average_length': 23.22, 'average_return': 23.22, 'max_length': 51, 'max_return': 51.0}
+209
+{'pg loss': -0.1381949782371521, 'value loss': 2.464878797531128, 'entropy': 0.6925392746925354}
+{'average_length': 22.71, 'average_return': 22.71, 'max_length': 51, 'max_return': 51.0}
+212
+{'pg loss': -0.06946756690740585, 'value loss': 4.03761100769043, 'entropy': 0.6926523447036743}
+{'average_length': 22.84, 'average_return': 22.84, 'max_length': 59, 'max_return': 59.0}
+216
+{'pg loss': -0.0163581483066082, 'value loss': 3.511791229248047, 'entropy': 0.6930192112922668}
+{'average_length': 23.01, 'average_return': 23.01, 'max_length': 66, 'max_return': 66.0}
+220
+{'pg loss': 0.10442277789115906, 'value loss': 3.5351667404174805, 'entropy': 0.6930239796638489}
+{'average_length': 23.2, 'average_return': 23.2, 'max_length': 66, 'max_return': 66.0}
+226
+{'pg loss': -0.030472636222839355, 'value loss': 3.0619640350341797, 'entropy': 0.6929075717926025}
+{'average_length': 22.53, 'average_return': 22.53, 'max_length': 66, 'max_return': 66.0}
+234
+{'pg loss': -0.034530606120824814, 'value loss': 2.266099452972412, 'entropy': 0.6928261518478394}
+{'average_length': 22.01, 'average_return': 22.01, 'max_length': 66, 'max_return': 66.0}
+240
+{'pg loss': -0.19881214201450348, 'value loss': 2.2593905925750732, 'entropy': 0.6929242610931396}
+{'average_length': 22.22, 'average_return': 22.22, 'max_length': 66, 'max_return': 66.0}
+244
+{'pg loss': 0.05211454629898071, 'value loss': 4.1273112297058105, 'entropy': 0.6927560567855835}
+{'average_length': 22.47, 'average_return': 22.47, 'max_length': 66, 'max_return': 66.0}
+250
+{'pg loss': -0.19235897064208984, 'value loss': 2.0885097980499268, 'entropy': 0.6929382681846619}
+{'average_length': 22.15, 'average_return': 22.15, 'max_length': 66, 'max_return': 66.0}
+255
+{'pg loss': -0.19950519502162933, 'value loss': 2.583754301071167, 'entropy': 0.6930496096611023}
+{'average_length': 22.45, 'average_return': 22.45, 'max_length': 66, 'max_return': 66.0}
+261
+{'pg loss': 0.026531705632805824, 'value loss': 2.92349910736084, 'entropy': 0.6931110620498657}
+{'average_length': 21.99, 'average_return': 21.99, 'max_length': 66, 'max_return': 66.0}
+267
+{'pg loss': 0.11991424858570099, 'value loss': 2.828763961791992, 'entropy': 0.6930671334266663}
+{'average_length': 21.9, 'average_return': 21.9, 'max_length': 66, 'max_return': 66.0}
+272
+{'pg loss': 0.17534437775611877, 'value loss': 3.6091384887695312, 'entropy': 0.6930426359176636}
+{'average_length': 22.18, 'average_return': 22.18, 'max_length': 66, 'max_return': 66.0}
+277
+{'pg loss': -0.1691763699054718, 'value loss': 2.5961389541625977, 'entropy': 0.6930773258209229}
+{'average_length': 22.27, 'average_return': 22.27, 'max_length': 66, 'max_return': 66.0}
+283
+{'pg loss': -0.1284199059009552, 'value loss': 2.046180009841919, 'entropy': 0.6929994821548462}
+{'average_length': 22.55, 'average_return': 22.55, 'max_length': 66, 'max_return': 66.0}
+290
+{'pg loss': -0.3140472173690796, 'value loss': 1.5460456609725952, 'entropy': 0.6931172013282776}
+{'average_length': 22.66, 'average_return': 22.66, 'max_length': 66, 'max_return': 66.0}
+295
+{'pg loss': 0.09154695272445679, 'value loss': 3.21787166595459, 'entropy': 0.6929374933242798}
+{'average_length': 22.42, 'average_return': 22.42, 'max_length': 66, 'max_return': 66.0}
+301
+{'pg loss': -0.04926375672221184, 'value loss': 2.6171019077301025, 'entropy': 0.6929613351821899}
+{'average_length': 22.69, 'average_return': 22.69, 'max_length': 66, 'max_return': 66.0}
+307
+{'pg loss': -0.050610482692718506, 'value loss': 2.541887044906616, 'entropy': 0.6929251551628113}
+{'average_length': 22.46, 'average_return': 22.46, 'max_length': 66, 'max_return': 66.0}
+312
+{'pg loss': -0.007992880418896675, 'value loss': 3.5608699321746826, 'entropy': 0.6927677392959595}
+{'average_length': 22.2, 'average_return': 22.2, 'max_length': 66, 'max_return': 66.0}
+316
+{'pg loss': 0.0017730197869241238, 'value loss': 3.3110530376434326, 'entropy': 0.6923689842224121}
+{'average_length': 22.05, 'average_return': 22.05, 'max_length': 66, 'max_return': 66.0}
+321
+{'pg loss': -0.03041037730872631, 'value loss': 3.047882080078125, 'entropy': 0.6923986673355103}
+{'average_length': 21.8, 'average_return': 21.8, 'max_length': 66, 'max_return': 66.0}
+326
+{'pg loss': 0.10035336017608643, 'value loss': 3.2327589988708496, 'entropy': 0.6928334832191467}
+{'average_length': 21.89, 'average_return': 21.89, 'max_length': 66, 'max_return': 66.0}
+332
+{'pg loss': 0.054583173245191574, 'value loss': 2.776599407196045, 'entropy': 0.6930147409439087}
+{'average_length': 22.37, 'average_return': 22.37, 'max_length': 66, 'max_return': 66.0}
+337
+{'pg loss': -0.16528336703777313, 'value loss': 2.2628517150878906, 'entropy': 0.6926854252815247}
+{'average_length': 22.62, 'average_return': 22.62, 'max_length': 66, 'max_return': 66.0}
+345
+{'pg loss': -0.029776841402053833, 'value loss': 1.780367374420166, 'entropy': 0.6923449635505676}
+{'average_length': 21.81, 'average_return': 21.81, 'max_length': 53, 'max_return': 53.0}
+351
+{'pg loss': -0.27841347455978394, 'value loss': 2.086146831512451, 'entropy': 0.6917579174041748}
+{'average_length': 22.0, 'average_return': 22.0, 'max_length': 53, 'max_return': 53.0}
+357
+{'pg loss': 0.18484348058700562, 'value loss': 2.7386083602905273, 'entropy': 0.6924994587898254}
+{'average_length': 21.77, 'average_return': 21.77, 'max_length': 53, 'max_return': 53.0}
+361
+{'pg loss': -0.27258944511413574, 'value loss': 2.7144222259521484, 'entropy': 0.6928483843803406}
+{'average_length': 22.04, 'average_return': 22.04, 'max_length': 53, 'max_return': 53.0}
+366
+{'pg loss': -0.018373269587755203, 'value loss': 2.641493320465088, 'entropy': 0.6929516792297363}
+{'average_length': 22.37, 'average_return': 22.37, 'max_length': 53, 'max_return': 53.0}
+371
+{'pg loss': -0.10757388919591904, 'value loss': 2.4263172149658203, 'entropy': 0.6928854584693909}
+{'average_length': 22.31, 'average_return': 22.31, 'max_length': 53, 'max_return': 53.0}
+375
+{'pg loss': 0.21907509863376617, 'value loss': 4.177516937255859, 'entropy': 0.692893385887146}
+{'average_length': 22.71, 'average_return': 22.71, 'max_length': 65, 'max_return': 65.0}
+382
+{'pg loss': 0.13156774640083313, 'value loss': 2.488433599472046, 'entropy': 0.6924761533737183}
+{'average_length': 22.15, 'average_return': 22.15, 'max_length': 65, 'max_return': 65.0}
+387
+{'pg loss': 0.04979974403977394, 'value loss': 2.992849588394165, 'entropy': 0.6924460530281067}
+{'average_length': 22.54, 'average_return': 22.54, 'max_length': 65, 'max_return': 65.0}
+393
+{'pg loss': 0.012037208303809166, 'value loss': 2.411375045776367, 'entropy': 0.6927898526191711}
+{'average_length': 22.67, 'average_return': 22.67, 'max_length': 65, 'max_return': 65.0}
+398
+{'pg loss': -0.3392997980117798, 'value loss': 2.1847774982452393, 'entropy': 0.6927860379219055}
+{'average_length': 22.66, 'average_return': 22.66, 'max_length': 65, 'max_return': 65.0}
+405
+{'pg loss': -0.1587563008069992, 'value loss': 1.607774257659912, 'entropy': 0.6930359601974487}
+{'average_length': 22.53, 'average_return': 22.53, 'max_length': 65, 'max_return': 65.0}
+410
+{'pg loss': -0.036225415766239166, 'value loss': 2.6279587745666504, 'entropy': 0.6931100487709045}
+{'average_length': 22.51, 'average_return': 22.51, 'max_length': 65, 'max_return': 65.0}
+415
+{'pg loss': -0.13529814779758453, 'value loss': 2.473454713821411, 'entropy': 0.6929517388343811}
+{'average_length': 22.18, 'average_return': 22.18, 'max_length': 65, 'max_return': 65.0}
+421
+{'pg loss': 0.11739067733287811, 'value loss': 2.0843589305877686, 'entropy': 0.6926812529563904}
+{'average_length': 22.16, 'average_return': 22.16, 'max_length': 65, 'max_return': 65.0}
+426
+{'pg loss': 0.17291390895843506, 'value loss': 3.1905078887939453, 'entropy': 0.6925694942474365}
+{'average_length': 22.14, 'average_return': 22.14, 'max_length': 65, 'max_return': 65.0}
+431
+{'pg loss': 0.03502805531024933, 'value loss': 2.9705569744110107, 'entropy': 0.693028450012207}
+{'average_length': 22.13, 'average_return': 22.13, 'max_length': 65, 'max_return': 65.0}
+437
+{'pg loss': -0.11465596407651901, 'value loss': 1.9431004524230957, 'entropy': 0.6926009654998779}
+{'average_length': 22.17, 'average_return': 22.17, 'max_length': 65, 'max_return': 65.0}
+443
+{'pg loss': -0.16491572558879852, 'value loss': 1.6249629259109497, 'entropy': 0.6924290657043457}
+{'average_length': 22.21, 'average_return': 22.21, 'max_length': 65, 'max_return': 65.0}
+Traceback (most recent call last):
+  File "/home/anthony/PycharmProjects/ppo_kata/main.py", line 132, in <module>
+    loss_dict = agent.learn()
+  File "/home/anthony/PycharmProjects/ppo_kata/model.py", line 169, in learn
+    self.optim.step()
+  File "/home/anthony/.pyenv/versions/dev/lib/python3.7/site-packages/torch/optim/optimizer.py", line 88, in wrapper
+    return func(*args, **kwargs)
+  File "/home/anthony/.pyenv/versions/dev/lib/python3.7/site-packages/torch/autograd/grad_mode.py", line 28, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/anthony/.pyenv/versions/dev/lib/python3.7/site-packages/torch/optim/adam.py", line 118, in step
+    eps=group['eps'])
+  File "/home/anthony/.pyenv/versions/dev/lib/python3.7/site-packages/torch/optim/_functional.py", line 98, in adam
+    param.addcdiv_(exp_avg, denom, value=-step_size)
+KeyboardInterrupt

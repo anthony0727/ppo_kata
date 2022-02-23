@@ -1,0 +1,113 @@
+<Monitor<TimeLimit<CartPoleEnv<CartPole-v1>>>>
+EnvSpec(CartPole-v1)
+Box([-4.8000002e+00 -3.4028235e+38 -4.1887903e-01 -3.4028235e+38], [4.8000002e+00 3.4028235e+38 4.1887903e-01 3.4028235e+38], (4,), float32)
+Discrete(2)
+example transition
+OrderedDict([('obs', array([-2.1007750e+00, -2.4871577e+38, -2.4687718e-01,  2.7347799e+38],
+      dtype=float32)), ('action', 0), ('reward', 0.0), ('done', False)])
+buffer spec
+[('obs', '<f4', (4,)), ('action', '<i8'), ('reward', '<f8'), ('done', 'u1'), ('value', '<f4'), ('log_prob', '<f4')]
+Agent(
+  (actor): Sequential(
+    (0): Linear(in_features=4, out_features=256, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=256, out_features=256, bias=True)
+    (3): Tanh()
+    (4): Linear(in_features=256, out_features=2, bias=True)
+    (5): Softmax(dim=-1)
+  )
+  (critic): Sequential(
+    (0): Linear(in_features=4, out_features=256, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=256, out_features=256, bias=True)
+    (3): Tanh()
+    (4): Linear(in_features=256, out_features=1, bias=True)
+  )
+)
+6
+{'pg loss': 0.023399319499731064, 'value loss': 3.987605333328247, 'entropy': 0.6885322332382202}
+{'average_length': 23.2, 'average_return': 23.2, 'max_length': 36, 'max_return': 36.0}
+10
+{'pg loss': -0.09010035544633865, 'value loss': 4.3353071212768555, 'entropy': 0.6911226511001587}
+{'average_length': 27.0, 'average_return': 27.0, 'max_length': 52, 'max_return': 52.0}
+17
+{'pg loss': -0.26014578342437744, 'value loss': 2.509615182876587, 'entropy': 0.692116916179657}
+{'average_length': 22.4375, 'average_return': 22.4375, 'max_length': 52, 'max_return': 52.0}
+24
+{'pg loss': -0.11744967103004456, 'value loss': 3.113250970840454, 'entropy': 0.693043053150177}
+{'average_length': 21.26086956521739, 'average_return': 21.26086956521739, 'max_length': 52, 'max_return': 52.0}
+29
+{'pg loss': 0.03504469245672226, 'value loss': 3.9087865352630615, 'entropy': 0.6929118633270264}
+{'average_length': 21.678571428571427, 'average_return': 21.678571428571427, 'max_length': 52, 'max_return': 52.0}
+36
+{'pg loss': -0.09396227449178696, 'value loss': 2.8245248794555664, 'entropy': 0.6929740905761719}
+{'average_length': 20.771428571428572, 'average_return': 20.771428571428572, 'max_length': 52, 'max_return': 52.0}
+44
+{'pg loss': 0.10667768120765686, 'value loss': 2.744925022125244, 'entropy': 0.6926084756851196}
+{'average_length': 19.697674418604652, 'average_return': 19.697674418604652, 'max_length': 52, 'max_return': 52.0}
+50
+{'pg loss': -0.3208705484867096, 'value loss': 2.560006856918335, 'entropy': 0.6923302412033081}
+{'average_length': 19.714285714285715, 'average_return': 19.714285714285715, 'max_length': 52, 'max_return': 52.0}
+55
+{'pg loss': 0.12667958438396454, 'value loss': 4.162698268890381, 'entropy': 0.6927865743637085}
+{'average_length': 20.01851851851852, 'average_return': 20.01851851851852, 'max_length': 52, 'max_return': 52.0}
+61
+{'pg loss': -0.04299906641244888, 'value loss': 3.101665496826172, 'entropy': 0.6930548548698425}
+{'average_length': 20.2, 'average_return': 20.2, 'max_length': 52, 'max_return': 52.0}
+67
+{'pg loss': -0.009162845090031624, 'value loss': 3.1056160926818848, 'entropy': 0.6926907300949097}
+{'average_length': 20.242424242424242, 'average_return': 20.242424242424242, 'max_length': 52, 'max_return': 52.0}
+74
+{'pg loss': -0.2635495364665985, 'value loss': 2.2973766326904297, 'entropy': 0.6926823258399963}
+{'average_length': 19.876712328767123, 'average_return': 19.876712328767123, 'max_length': 52, 'max_return': 52.0}
+78
+{'pg loss': -0.027324864640831947, 'value loss': 4.192002296447754, 'entropy': 0.6929261684417725}
+{'average_length': 20.506493506493506, 'average_return': 20.506493506493506, 'max_length': 56, 'max_return': 56.0}
+84
+{'pg loss': 0.12342643737792969, 'value loss': 3.547297954559326, 'entropy': 0.6929128170013428}
+{'average_length': 20.518072289156628, 'average_return': 20.518072289156628, 'max_length': 56, 'max_return': 56.0}
+90
+{'pg loss': 0.07254406064748764, 'value loss': 3.522873878479004, 'entropy': 0.6929373741149902}
+{'average_length': 20.573033707865168, 'average_return': 20.573033707865168, 'max_length': 56, 'max_return': 56.0}
+97
+{'pg loss': -0.10326321423053741, 'value loss': 2.413949489593506, 'entropy': 0.6930550932884216}
+{'average_length': 20.239583333333332, 'average_return': 20.239583333333332, 'max_length': 56, 'max_return': 56.0}
+102
+{'pg loss': 0.053399309515953064, 'value loss': 3.542874336242676, 'entropy': 0.6930136680603027}
+{'average_length': 20.53, 'average_return': 20.53, 'max_length': 56, 'max_return': 56.0}
+107
+{'pg loss': -0.19140787422657013, 'value loss': 3.2277538776397705, 'entropy': 0.6930380463600159}
+{'average_length': 20.27, 'average_return': 20.27, 'max_length': 56, 'max_return': 56.0}
+112
+{'pg loss': 0.15662655234336853, 'value loss': 3.8575456142425537, 'entropy': 0.6929208040237427}
+{'average_length': 20.22, 'average_return': 20.22, 'max_length': 56, 'max_return': 56.0}
+118
+{'pg loss': -0.034456800669431686, 'value loss': 3.030278444290161, 'entropy': 0.6926919221878052}
+{'average_length': 20.63, 'average_return': 20.63, 'max_length': 56, 'max_return': 56.0}
+124
+{'pg loss': -0.012603913433849812, 'value loss': 2.9779510498046875, 'entropy': 0.6919494867324829}
+{'average_length': 20.74, 'average_return': 20.74, 'max_length': 56, 'max_return': 56.0}
+128
+{'pg loss': -0.005413246341049671, 'value loss': 3.652785539627075, 'entropy': 0.6925120949745178}
+{'average_length': 20.93, 'average_return': 20.93, 'max_length': 56, 'max_return': 56.0}
+135
+{'pg loss': 0.06954070180654526, 'value loss': 2.6180918216705322, 'entropy': 0.6925409436225891}
+{'average_length': 21.01, 'average_return': 21.01, 'max_length': 56, 'max_return': 56.0}
+140
+{'pg loss': 0.09514151513576508, 'value loss': 3.7740447521209717, 'entropy': 0.6924110054969788}
+{'average_length': 21.4, 'average_return': 21.4, 'max_length': 56, 'max_return': 56.0}
+146
+{'pg loss': 0.030530570074915886, 'value loss': 2.7738828659057617, 'entropy': 0.6922730803489685}
+{'average_length': 21.56, 'average_return': 21.56, 'max_length': 56, 'max_return': 56.0}
+151
+{'pg loss': 0.1720544546842575, 'value loss': 3.8011395931243896, 'entropy': 0.6924813985824585}
+{'average_length': 21.91, 'average_return': 21.91, 'max_length': 56, 'max_return': 56.0}
+158
+{'pg loss': -0.014004560187458992, 'value loss': 2.4853742122650146, 'entropy': 0.6923396587371826}
+{'average_length': 21.35, 'average_return': 21.35, 'max_length': 56, 'max_return': 56.0}
+Traceback (most recent call last):
+  File "/home/anthony/PycharmProjects/ppo_kata/main.py", line 128, in <module>
+    loss_dict = agent.learn()
+  File "/home/anthony/PycharmProjects/ppo_kata/model.py", line 181, in learn
+    'value loss': critic_loss.item(),
+KeyboardInterrupt

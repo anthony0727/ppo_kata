@@ -26,23 +26,29 @@ class RolloutWorker:
         self.max_steps = max_steps
         self.env = env
         self.agent = agent
+        self.done = True
         self.obs, self.rew, self.done = env.reset(), 0., False
+        self.ac = agent.act(self.obs)
+        self.global_steps = 0
+
+    def last_transition(self):
+        return (self.obs, self.ac, self.rew, self.done)
 
     def run(self, steps):
-        for step in range(steps):
-            if step == self.max_steps:
-                break
-
-            ac = agent.act(self.obs)
-            agent.observe(self.obs, ac, self.rew, self.done)
-
+        agent.observe(*self.last_transition())
+        ############
+        for step in range(steps-1):
             if self.done:
                 self.obs, self.rew, self.done = env.reset(), 0., False
             else:
-                self.obs, self.rew, self.done, info = env.step(ac)
+                self.obs, self.rew, self.done, info = env.step(self.ac)
 
+            self.ac = agent.act(self.obs)
+            agent.observe(self.obs, self.ac, self.rew, self.done)
+        #############
         info = {}
         try:
+            # if self.global_step % log_interval == 0:
             num_episodes = 100
             lengths = np.array(env.get_episode_lengths()[-num_episodes:])
             returns = np.array(env.get_episode_rewards()[-num_episodes:])
@@ -58,7 +64,7 @@ class RolloutWorker:
 
 DEBUG = True
 WANDB = False
-WANDB = True
+# WANDB = True
 WANDB_MODE = 'online' if WANDB else 'offline'
 
 
@@ -68,10 +74,12 @@ def _p(x):
 
 
 if __name__ == '__main__':
-    summary_writer = SummaryWriter('.')
+    log_dir = '/tmp/' + str(uuid.uuid4())
+    summary_writer = SummaryWriter(log_dir)
 
     wandb.init(project="ppo-v2", mode=WANDB_MODE)
     env = gym.make('CartPole-v1')
+    env = wrappers.Monitor(env, log_dir, video_callable=False)
     # env = gym.make('Acrobot-v1')
     _p(env.__repr__())
     _p(env.spec)
@@ -108,17 +116,17 @@ if __name__ == '__main__':
     num_actions = env.action_space.n
     agent = Agent(buffer, in_features, num_actions, device)
     _p(agent)
-    # summary_writer.add_graph(agent, torch.FloatTensor(eg['obs']).to('cuda'))
-    env = wrappers.Monitor(
-        env,
-        '/tmp/' + str(uuid.uuid4()),
-        video_callable=False
-    )
+    # summary_writer.add_graph(agent.actor, torch.FloatTensor(eg['obs']).to('cuda'))
+    # summary_writer.add_graph(agent.critic, torch.FloatTensor(eg['obs']).to('cuda'))
+
+
     num_epochs = 1000
     worker = RolloutWorker(env=env, agent=agent)
     for epoch in range(num_epochs):
         info = worker.run(steps=train_interval)
+        # agent.observe(*worker.last_transition())
         loss_dict = agent.learn()
+        agent.buffer.reset()
         if DEBUG:
             _p(env.episode_id)
             _p(loss_dict)

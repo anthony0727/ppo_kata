@@ -1,0 +1,12 @@
+2022-02-23 18:11:00,132 INFO    MainThread:331775 [internal.py:wandb_internal():92] W&B internal server running at pid: 331775, started at: 2022-02-23 18:11:00.131681
+2022-02-23 18:11:00,136 INFO    WriterThread:331775 [datastore.py:open_for_write():77] open: /home/anthony/PycharmProjects/ppo_kata/wandb/offline-run-20220223_181057-r958pim5/run-r958pim5.wandb
+2022-02-23 18:11:00,138 DEBUG   HandlerThread:331775 [handler.py:handle_request():131] handle_request: run_start
+2022-02-23 18:11:03,340 DEBUG   HandlerThread:331775 [meta.py:__init__():36] meta init
+2022-02-23 18:11:03,340 DEBUG   HandlerThread:331775 [meta.py:__init__():50] meta init done
+2022-02-23 18:11:03,341 DEBUG   HandlerThread:331775 [meta.py:probe():210] probe
+2022-02-23 18:11:03,344 DEBUG   HandlerThread:331775 [meta.py:_setup_git():200] setup git
+2022-02-23 18:11:03,383 DEBUG   HandlerThread:331775 [meta.py:_setup_git():207] setup git done
+2022-02-23 18:11:03,383 DEBUG   HandlerThread:331775 [meta.py:_save_pip():54] save pip
+2022-02-23 18:11:03,386 DEBUG   HandlerThread:331775 [meta.py:_save_pip():68] save pip done
+2022-02-23 18:11:03,386 DEBUG   HandlerThread:331775 [meta.py:probe():248] probe done
+2022-02-23 18:11:40,075 WARNING MainThread:331775 [internal.py:wandb_internal():152] Internal process interrupt: 1

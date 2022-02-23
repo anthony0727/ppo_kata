@@ -4,12 +4,16 @@ from torch import nn
 from torch.nn import functional as F
 from torch.distributions import Categorical
 from torch.optim import Adam
+from torch.utils.data import DataLoader
+from torch.utils.data.dataset import IterableDataset
 
 from utils import standardize
 
+_device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-def _t(x, device='cuda', cls=torch.FloatTensor):
-    return cls(x).to(device)
+
+def _t(x, device=_device, cls=torch.FloatTensor):
+    return cls(np.asarray(x, order='C')).to(device)
 
 
 def _dynamic_zeros_like(x):
@@ -22,8 +26,9 @@ def _dynamic_zeros_like(x):
 
 
 def gae(rews, vals, dones, gam=0.99, lamb=0.95):
+    # rews : 0~t, vals, dones : 0~t+1
     advs = _dynamic_zeros_like(vals)
-    masks = 1 - dones  # n + 1
+    masks = 1. - dones
     for i in reversed(range(len(vals) - 1)):
         delta = -vals[i] + (rews[i] + masks[i] * (gam * vals[i + 1]))
         advs[i] = delta + masks[i] * (gam * lamb * advs[i + 1])
@@ -45,7 +50,7 @@ class Agent(nn.Module):
             in_features,
             num_actions,
             device,
-            lr=1e-4,
+            lr=1e-5,
             local_epochs=4,
     ):
         super().__init__()
@@ -70,6 +75,12 @@ class Agent(nn.Module):
             nn.Tanh(),
             nn.Linear(256, 1)
         ).to(device)
+
+        def _init_weights(m):
+            if isinstance(m, nn.Linear):
+                nn.init.normal_(m.weight)
+
+        self.apply(_init_weights)
         self.optim = Adam(
             list(self.actor.parameters()) + list(self.critic.parameters()),
             lr=lr
@@ -123,17 +134,23 @@ class Agent(nn.Module):
         )
 
     def learn(self):
-        buffer = self.buffer[:-1] # omit last value
-        advs = gae(buffer['reward'], self.buffer['value'], buffer['done'])
-        returns = _t(buffer['value'] + advs)
-        advs = standardize(_t(advs))
+        buffer = self.buffer[:-1]  # omit last value
+        advs = gae(buffer['reward'], self.buffer['value'], self.buffer['done'])
+        advs = _t(advs)
+        returns = _t(buffer['value']) + advs
+        advs = standardize(advs)
         num_batches = 4
-        idxes = np.arange(0, len(buffer)) # misleading?
+        idxes = np.arange(0, len(buffer))  # misleading?
+        np.random.shuffle(idxes)
         idxes = np.split(idxes, num_batches)
+
+        # data_set = IterableDataset(buffer)
+        # data_loader = DataLoader(data_set, pin_memory=True)
+        # for batch in data_loader
 
         for local_epoch in range(self.local_epochs):
             for batch_idx in idxes:
-                batch = buffer[batch_idx].as_tensor_dict(device='cuda')
+                batch = buffer[batch_idx].as_tensor_dict(device=_device)
                 # inference
                 ac_dist, values = self(batch['obs'])
 
@@ -146,8 +163,10 @@ class Agent(nn.Module):
                 vf_coef = 0.5
                 ent_coef = 0.001
                 entropy = ac_dist.entropy().mean()
-                actor_loss = surrogate_loss(ratios, batch_advs) + ent_coef * entropy
-                critic_loss = vf_coef * F.smooth_l1_loss(values, returns[batch_idx])
+                actor_loss = surrogate_loss(ratios,
+                                            batch_advs) + ent_coef * entropy
+                critic_loss = vf_coef * F.smooth_l1_loss(values,
+                                                         returns[batch_idx])
 
                 utility = actor_loss - critic_loss
                 loss = -utility
@@ -160,7 +179,7 @@ class Agent(nn.Module):
                 # self.critic_optim.zero_grad()
                 # critic_loss.backward()
                 # self.critic_optim.step()
-        self.buffer.reset()
+        # self.buffer.reset()
 
         return {
             # 'ppo loss': loss.item(),

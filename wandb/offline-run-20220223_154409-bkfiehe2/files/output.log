@@ -1,0 +1,80 @@
+<Monitor<TimeLimit<CartPoleEnv<CartPole-v1>>>>
+EnvSpec(CartPole-v1)
+Box([-4.8000002e+00 -3.4028235e+38 -4.1887903e-01 -3.4028235e+38], [4.8000002e+00 3.4028235e+38 4.1887903e-01 3.4028235e+38], (4,), float32)
+Discrete(2)
+example transition
+OrderedDict([('obs', array([-1.7615502e+00, -3.3112847e+38, -1.9358361e-02, -2.9253672e+38],
+      dtype=float32)), ('action', 1), ('reward', 0.0), ('done', False)])
+buffer spec
+[('obs', '<f4', (4,)), ('action', '<i8'), ('reward', '<f8'), ('done', 'u1'), ('value', '<f4'), ('log_prob', '<f4')]
+Agent(
+  (actor): Sequential(
+    (0): Linear(in_features=4, out_features=256, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=256, out_features=256, bias=True)
+    (3): Tanh()
+    (4): Linear(in_features=256, out_features=2, bias=True)
+    (5): Softmax(dim=-1)
+  )
+  (critic): Sequential(
+    (0): Linear(in_features=4, out_features=256, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=256, out_features=256, bias=True)
+    (3): Tanh()
+    (4): Linear(in_features=256, out_features=1, bias=True)
+  )
+)
+7
+{'pg loss': -0.03344475477933884, 'value loss': 3.186284065246582, 'entropy': 0.6925853490829468}
+{'average_length': 17.833333333333332, 'average_return': 17.833333333333332, 'max_length': 24, 'max_return': 24.0}
+11
+{'pg loss': 0.0713610127568245, 'value loss': 4.341090679168701, 'entropy': 0.6929815411567688}
+{'average_length': 22.363636363636363, 'average_return': 22.363636363636363, 'max_length': 39, 'max_return': 39.0}
+17
+{'pg loss': -0.4108603000640869, 'value loss': 3.0758373737335205, 'entropy': 0.6929144263267517}
+{'average_length': 22.8125, 'average_return': 22.8125, 'max_length': 43, 'max_return': 43.0}
+22
+{'pg loss': -0.01159385871142149, 'value loss': 3.5670721530914307, 'entropy': 0.6929978132247925}
+{'average_length': 22.714285714285715, 'average_return': 22.714285714285715, 'max_length': 43, 'max_return': 43.0}
+29
+{'pg loss': -0.14858290553092957, 'value loss': 2.8550634384155273, 'entropy': 0.6930890083312988}
+{'average_length': 21.5, 'average_return': 21.5, 'max_length': 43, 'max_return': 43.0}
+35
+{'pg loss': -0.10225516557693481, 'value loss': 3.1321816444396973, 'entropy': 0.6930652856826782}
+{'average_length': 20.97142857142857, 'average_return': 20.97142857142857, 'max_length': 43, 'max_return': 43.0}
+40
+{'pg loss': 0.035490699112415314, 'value loss': 3.9921340942382812, 'entropy': 0.693132758140564}
+{'average_length': 21.41025641025641, 'average_return': 21.41025641025641, 'max_length': 43, 'max_return': 43.0}
+45
+{'pg loss': -0.13511405885219574, 'value loss': 3.7084743976593018, 'entropy': 0.6930450797080994}
+{'average_length': 22.204545454545453, 'average_return': 22.204545454545453, 'max_length': 49, 'max_return': 49.0}
+51
+{'pg loss': 0.0051350099965929985, 'value loss': 3.174048662185669, 'entropy': 0.6930109858512878}
+{'average_length': 21.86, 'average_return': 21.86, 'max_length': 49, 'max_return': 49.0}
+56
+{'pg loss': 0.11472997814416885, 'value loss': 3.877743721008301, 'entropy': 0.6930013298988342}
+{'average_length': 22.181818181818183, 'average_return': 22.181818181818183, 'max_length': 49, 'max_return': 49.0}
+64
+{'pg loss': -0.19825489819049835, 'value loss': 2.1280224323272705, 'entropy': 0.6930364370346069}
+{'average_length': 21.015625, 'average_return': 21.015625, 'max_length': 49, 'max_return': 49.0}
+71
+{'pg loss': 0.16543206572532654, 'value loss': 3.43082857131958, 'entropy': 0.6930378675460815}
+{'average_length': 20.64788732394366, 'average_return': 20.64788732394366, 'max_length': 49, 'max_return': 49.0}
+Traceback (most recent call last):
+  File "/home/anthony/PycharmProjects/ppo_kata/main.py", line 123, in <module>
+    info = worker.run(steps=train_interval)
+  File "/home/anthony/PycharmProjects/ppo_kata/main.py", line 34, in run
+    env.render()
+  File "/home/anthony/.pyenv/versions/dev/lib/python3.7/site-packages/gym/core.py", line 254, in render
+    return self.env.render(mode, **kwargs)
+  File "/home/anthony/.pyenv/versions/dev/lib/python3.7/site-packages/gym/core.py", line 254, in render
+    return self.env.render(mode, **kwargs)
+  File "/home/anthony/.pyenv/versions/dev/lib/python3.7/site-packages/gym/envs/classic_control/cartpole.py", line 229, in render
+    return self.viewer.render(return_rgb_array=mode == "rgb_array")
+  File "/home/anthony/.pyenv/versions/dev/lib/python3.7/site-packages/gym/envs/classic_control/rendering.py", line 123, in render
+    self.window.clear()
+  File "/home/anthony/.pyenv/versions/dev/lib/python3.7/site-packages/pyglet/window/__init__.py", line 1348, in clear
+    gl.glClear(gl.GL_COLOR_BUFFER_BIT | gl.GL_DEPTH_BUFFER_BIT)
+  File "/home/anthony/.pyenv/versions/dev/lib/python3.7/site-packages/pyglet/gl/lib.py", line 87, in errcheck
+    def errcheck(result, func, arguments):
+KeyboardInterrupt

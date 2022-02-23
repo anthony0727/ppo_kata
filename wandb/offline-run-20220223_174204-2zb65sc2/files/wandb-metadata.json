@@ -1,0 +1,22 @@
+{
+    "os": "Linux-4.18.0-338.el8.x86_64-x86_64-with-centos-8",
+    "python": "3.7.11",
+    "heartbeatAt": "2022-02-23T08:42:06.334691",
+    "startedAt": "2022-02-23T08:42:04.304293",
+    "docker": null,
+    "cpu_count": 8,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/anthony/PycharmProjects/ppo_kata/main.py",
+    "codePath": "main.py",
+    "git": {
+        "remote": "git@github.com:anthony0727/ppo_kata.git",
+        "commit": "3b106a8a9ed7f76e10fc3c207a894b2501be3dca"
+    },
+    "email": "jwseok0727@gmail.com",
+    "root": "/home/anthony/PycharmProjects/ppo_kata",
+    "host": "localhost.localdomain",
+    "username": "anthony",
+    "executable": "/home/anthony/.pyenv/versions/dev/bin/python"
+}

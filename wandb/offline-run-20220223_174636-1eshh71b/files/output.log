@@ -1,0 +1,27 @@
+<Monitor<TimeLimit<CartPoleEnv<CartPole-v1>>>>
+EnvSpec(CartPole-v1)
+Box([-4.8000002e+00 -3.4028235e+38 -4.1887903e-01 -3.4028235e+38], [4.8000002e+00 3.4028235e+38 4.1887903e-01 3.4028235e+38], (4,), float32)
+Discrete(2)
+example transition
+OrderedDict([('obs', array([-1.6730984e+00,  2.8202220e+38, -3.7817433e-01,  2.2370510e+38],
+      dtype=float32)), ('action', 0), ('reward', 0.0), ('done', False)])
+buffer spec
+[('obs', '<f4', (4,)), ('action', '<i8'), ('reward', '<f8'), ('done', 'u1'), ('value', '<f4'), ('log_prob', '<f4')]
+Traceback (most recent call last):
+  File "/home/anthony/PycharmProjects/ppo_kata/main.py", line 116, in <module>
+    agent = Agent(buffer, in_features, num_actions, device)
+  File "/home/anthony/PycharmProjects/ppo_kata/model.py", line 80, in __init__
+    self.apply(_init_weights)
+  File "/home/anthony/.pyenv/versions/dev/lib/python3.7/site-packages/torch/nn/modules/module.py", line 616, in apply
+    module.apply(fn)
+  File "/home/anthony/.pyenv/versions/dev/lib/python3.7/site-packages/torch/nn/modules/module.py", line 616, in apply
+    module.apply(fn)
+  File "/home/anthony/.pyenv/versions/dev/lib/python3.7/site-packages/torch/nn/modules/module.py", line 617, in apply
+    fn(self)
+  File "/home/anthony/PycharmProjects/ppo_kata/model.py", line 79, in _init_weights
+    nn.init.orthogonal_(x)
+  File "/home/anthony/.pyenv/versions/dev/lib/python3.7/site-packages/torch/nn/init.py", line 450, in orthogonal_
+    if tensor.ndimension() < 2:
+  File "/home/anthony/.pyenv/versions/dev/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1131, in __getattr__
+    type(self).__name__, name))
+AttributeError: 'Linear' object has no attribute 'ndimension'

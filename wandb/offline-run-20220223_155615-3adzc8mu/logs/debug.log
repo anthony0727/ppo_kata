@@ -1,0 +1,30 @@
+2022-02-23 15:56:15,139 INFO    MainThread:310850 [wandb_setup.py:_flush():75] Loading settings from /home/anthony/.config/wandb/settings
+2022-02-23 15:56:15,140 INFO    MainThread:310850 [wandb_setup.py:_flush():75] Loading settings from /home/anthony/PycharmProjects/ppo_kata/wandb/settings
+2022-02-23 15:56:15,140 INFO    MainThread:310850 [wandb_setup.py:_flush():75] Loading settings from environment variables: {}
+2022-02-23 15:56:15,140 INFO    MainThread:310850 [wandb_setup.py:_flush():75] Inferring run settings from compute environment: {'program_relpath': 'main.py', 'program': '/home/anthony/PycharmProjects/ppo_kata/main.py'}
+2022-02-23 15:56:15,140 INFO    MainThread:310850 [wandb_init.py:_log_setup():386] Logging user logs to /home/anthony/PycharmProjects/ppo_kata/wandb/offline-run-20220223_155615-3adzc8mu/logs/debug.log
+2022-02-23 15:56:15,140 INFO    MainThread:310850 [wandb_init.py:_log_setup():387] Logging internal logs to /home/anthony/PycharmProjects/ppo_kata/wandb/offline-run-20220223_155615-3adzc8mu/logs/debug-internal.log
+2022-02-23 15:56:15,141 INFO    MainThread:310850 [wandb_init.py:init():420] calling init triggers
+2022-02-23 15:56:15,141 INFO    MainThread:310850 [wandb_init.py:init():427] wandb.init called with sweep_config: {}
+config: {}
+2022-02-23 15:56:15,141 INFO    MainThread:310850 [wandb_init.py:init():471] starting backend
+2022-02-23 15:56:15,141 INFO    MainThread:310850 [backend.py:_multiprocessing_setup():101] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2022-02-23 15:56:15,155 INFO    MainThread:310850 [backend.py:ensure_launched():219] starting backend process...
+2022-02-23 15:56:15,767 INFO    MainThread:310850 [backend.py:ensure_launched():225] started backend process with pid: 310882
+2022-02-23 15:56:15,769 INFO    MainThread:310850 [wandb_init.py:init():480] backend started and connected
+2022-02-23 15:56:15,773 INFO    MainThread:310850 [wandb_init.py:init():550] updated telemetry
+2022-02-23 15:56:15,797 INFO    MainThread:310850 [wandb_init.py:init():624] starting run threads in backend
+2022-02-23 15:56:20,291 INFO    MainThread:310850 [wandb_run.py:_console_start():1827] atexit reg
+2022-02-23 15:56:20,292 INFO    MainThread:310850 [wandb_run.py:_redirect():1701] redirect: SettingsConsole.REDIRECT
+2022-02-23 15:56:20,292 INFO    MainThread:310850 [wandb_run.py:_redirect():1706] Redirecting console.
+2022-02-23 15:56:20,296 INFO    MainThread:310850 [wandb_run.py:_redirect():1762] Redirects installed.
+2022-02-23 15:56:20,297 INFO    MainThread:310850 [wandb_init.py:init():651] run started, returning control to user process
+2022-02-23 16:02:30,918 INFO    MainThread:310850 [wandb_run.py:_atexit_cleanup():1797] got exitcode: 0
+2022-02-23 16:02:30,919 INFO    MainThread:310850 [wandb_run.py:_restore():1769] restore
+2022-02-23 16:02:33,201 INFO    MainThread:310850 [wandb_run.py:_wait_for_finish():1929] got exit ret: 
+2022-02-23 16:02:33,303 INFO    MainThread:310850 [wandb_run.py:_wait_for_finish():1929] got exit ret: done: true
+exit_result {
+}
+local_info {
+}
+

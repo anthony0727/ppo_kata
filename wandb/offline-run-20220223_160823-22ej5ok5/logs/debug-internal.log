@@ -1,0 +1,12 @@
+2022-02-23 16:08:26,027 INFO    MainThread:312194 [internal.py:wandb_internal():92] W&B internal server running at pid: 312194, started at: 2022-02-23 16:08:26.027344
+2022-02-23 16:08:26,032 INFO    WriterThread:312194 [datastore.py:open_for_write():77] open: /home/anthony/PycharmProjects/ppo_kata/wandb/offline-run-20220223_160823-22ej5ok5/run-22ej5ok5.wandb
+2022-02-23 16:08:26,033 DEBUG   HandlerThread:312194 [handler.py:handle_request():131] handle_request: run_start
+2022-02-23 16:08:29,076 DEBUG   HandlerThread:312194 [meta.py:__init__():36] meta init
+2022-02-23 16:08:29,076 DEBUG   HandlerThread:312194 [meta.py:__init__():50] meta init done
+2022-02-23 16:08:29,076 DEBUG   HandlerThread:312194 [meta.py:probe():210] probe
+2022-02-23 16:08:29,079 DEBUG   HandlerThread:312194 [meta.py:_setup_git():200] setup git
+2022-02-23 16:08:29,118 DEBUG   HandlerThread:312194 [meta.py:_setup_git():207] setup git done
+2022-02-23 16:08:29,118 DEBUG   HandlerThread:312194 [meta.py:_save_pip():54] save pip
+2022-02-23 16:08:29,121 DEBUG   HandlerThread:312194 [meta.py:_save_pip():68] save pip done
+2022-02-23 16:08:29,122 DEBUG   HandlerThread:312194 [meta.py:probe():248] probe done
+2022-02-23 17:19:00,523 WARNING MainThread:312194 [internal.py:wandb_internal():152] Internal process interrupt: 1

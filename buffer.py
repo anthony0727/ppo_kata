@@ -62,30 +62,31 @@ class Buffer(np.ndarray):
         obj = super().__new__(cls, shape=max_size, dtype=dtype)
         obj.seed = seed
         obj.num_transitions = num_transitions
+        obj.curr_idx = 0
 
         return obj
 
     def __array_finalize__(self, obj):
-        self.curr_idx = 0
+        pass
 
     def reset(self):
         # reset will contain last transition from previous truncated episode
+        # self[0] = self[-1]  # .copy()
         self.curr_idx = 0
-        self[0] = self[-1].copy()
 
     def is_full(self):
-        return self.curr_idx == (len(self) - 1)
+        return self.curr_idx == len(self)
 
     def insert(self, idx, transition):
         for k, v in transition.items():
             self[k][idx] = v
 
     def append(self, **kwargs):
+        if self.is_full():
+            raise RuntimeError('full!!!!!!!!!!!!')
+
         self.insert(self.curr_idx, kwargs)
         self.curr_idx += 1
-
-        if self.is_full():
-            self.reset()
 
     @property
     def all_keys(self):

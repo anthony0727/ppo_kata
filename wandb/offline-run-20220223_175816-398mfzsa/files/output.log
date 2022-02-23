@@ -1,0 +1,37 @@
+<Monitor<TimeLimit<CartPoleEnv<CartPole-v1>>>>
+EnvSpec(CartPole-v1)
+Box([-4.8000002e+00 -3.4028235e+38 -4.1887903e-01 -3.4028235e+38], [4.8000002e+00 3.4028235e+38 4.1887903e-01 3.4028235e+38], (4,), float32)
+Discrete(2)
+example transition
+OrderedDict([('obs', array([-4.0345415e-01, -1.7093068e+38, -3.1166521e-01,  1.4574319e+38],
+      dtype=float32)), ('action', 1), ('reward', 0.0), ('done', False)])
+buffer spec
+[('obs', '<f4', (4,)), ('action', '<i8'), ('reward', '<f8'), ('done', 'u1'), ('value', '<f4'), ('log_prob', '<f4')]
+Agent(
+  (actor): Sequential(
+    (0): Linear(in_features=4, out_features=256, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=256, out_features=256, bias=True)
+    (3): Tanh()
+    (4): Linear(in_features=256, out_features=2, bias=True)
+    (5): Softmax(dim=-1)
+  )
+  (critic): Sequential(
+    (0): Linear(in_features=4, out_features=256, bias=True)
+    (1): Tanh()
+    (2): Linear(in_features=256, out_features=256, bias=True)
+    (3): Tanh()
+    (4): Linear(in_features=256, out_features=1, bias=True)
+  )
+)
+4
+{'pg loss': -0.060352079570293427, 'value loss': 5.816641807556152, 'entropy': 0.09378194808959961}
+{'average_length': 25.666666666666668, 'average_return': 25.666666666666668, 'max_length': 52, 'max_return': 52.0}
+Traceback (most recent call last):
+  File "/home/anthony/PycharmProjects/ppo_kata/main.py", line 126, in <module>
+    agent.observe(*worker.last_transition())
+  File "/home/anthony/PycharmProjects/ppo_kata/model.py", line 133, in observe
+    value=self.value,
+  File "/home/anthony/PycharmProjects/ppo_kata/buffer.py", line 86, in append
+    raise RuntimeError('full!!!!!!!!!!!!')
+RuntimeError: full!!!!!!!!!!!!
