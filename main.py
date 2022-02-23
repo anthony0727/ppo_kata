@@ -1,3 +1,4 @@
+import random
 import uuid
 from collections import OrderedDict
 
@@ -13,6 +14,11 @@ from buffer import Buffer
 from model import Agent
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
+# device = 'cpu'
+seed = 100
+random.seed(seed)
+np.random.seed(seed)
+torch.manual_seed(seed)
 
 num_actions = None
 
@@ -20,6 +26,8 @@ num_actions = None
 def _avg(l):
     return sum(l) / len(l)
 
+max_length = 0.
+max_return = 0.
 
 class RolloutWorker:
     def __init__(self, env, agent, max_steps=int(1e12)):
@@ -54,8 +62,8 @@ class RolloutWorker:
             returns = np.array(env.get_episode_rewards()[-num_episodes:])
             info['average_length'] = lengths.mean()
             info['average_return'] = returns.mean()
-            info['max_length'] = lengths.max()
-            info['max_return'] = returns.max()
+            info['max_length'] = max(max_length, lengths.max())
+            info['max_return'] = max(max_return, returns.max())
         except:
             pass
 
@@ -64,7 +72,7 @@ class RolloutWorker:
 
 DEBUG = True
 WANDB = False
-# WANDB = True
+WANDB = True
 WANDB_MODE = 'online' if WANDB else 'offline'
 
 
@@ -79,6 +87,7 @@ if __name__ == '__main__':
 
     wandb.init(project="ppo-v2", mode=WANDB_MODE)
     env = gym.make('CartPole-v1')
+    env.seed(seed)
     env = wrappers.Monitor(env, log_dir, video_callable=False)
     # env = gym.make('Acrobot-v1')
     _p(env.__repr__())

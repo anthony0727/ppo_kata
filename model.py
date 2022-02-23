@@ -10,6 +10,7 @@ from torch.utils.data.dataset import IterableDataset
 from utils import standardize
 
 _device = 'cuda' if torch.cuda.is_available() else 'cpu'
+# _device = 'cpu'
 
 
 def _t(x, device=_device, cls=torch.FloatTensor):
@@ -50,7 +51,7 @@ class Agent(nn.Module):
             in_features,
             num_actions,
             device,
-            lr=1e-5,
+            lr=5e-4,
             local_epochs=4,
     ):
         super().__init__()
@@ -161,7 +162,7 @@ class Agent(nn.Module):
                 batch_advs = advs[batch_idx]
                 # loss
                 vf_coef = 0.5
-                ent_coef = 0.001
+                ent_coef = 0.005
                 entropy = ac_dist.entropy().mean()
                 actor_loss = surrogate_loss(ratios,
                                             batch_advs) + ent_coef * entropy

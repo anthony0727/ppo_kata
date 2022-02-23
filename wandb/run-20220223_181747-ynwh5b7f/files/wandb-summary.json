@@ -1,0 +1,1 @@
+{"pg loss": -0.19315430521965027, "value loss": 1025568128630784.0, "entropy": 0.12489086389541626, "_runtime": 14, "_timestamp": 1645607881, "_step": 173, "average_length": 29.83, "average_return": 29.83, "max_length": 64, "max_return": 64.0, "_wandb": {"runtime": 15}}
